@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Checklist</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [hidden]="items.length == 0">
+        <ion-item>
+            <ion-searchbar [(ngModel)]="filter" (ionInput)="filterItems()" placeholder="Pesquisar"></ion-searchbar>
+        </ion-item>
+        <ion-item *ngFor="let checklist of filteredItems" (click)="editList(checklist)">
+            <ion-spinner *ngIf="!(checklist | async)?.name" color="primary" text-center name="crescent"></ion-spinner>
+            {{ (checklist | async)?.name }}
+            <button ion-button clear item-right (click)="removeList(checklist)"><i class="fa fa-trash" style="font-size: large"></i></button>
+        </ion-item>
+    </ion-list>
+    <div class="fdcl-nolist" [hidden]="items.length != 0">
+        Você não possui listas! Criei ou importe nos botões abaixo!
+        <img src="assets/img/arrows-choice.png" />
+    </div>
+</ion-content>
+
+<ion-footer>
+    <div class="fdcl-footer btn-left">
+        <button ion-button full (click)="createChecklist()">Criar Lista</button>
+    </div>
+    <div class="fdcl-footer btn-right">
+        <button ion-button full (click)="importChecklist()">Importar Lista</button>
+    </div>
+</ion-footer>

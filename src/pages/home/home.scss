@@ -1,0 +1,24 @@
+home {
+    .fdcl-nolist {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+    }
+    .fdcl-nolist img {
+        width: 100%;
+        height: 95%;
+    }
+    .fdcl-footer.btn-left {
+        width: 50%;
+        float: left;
+        border-right: solid 1px white;
+    }
+    .fdcl-footer.btn-right {
+        width: 50%;
+        float: right;
+        border-left: solid 1px white;
+    }
+    .fdcl-footer.copyright {
+        text-align: center;
+    }
+}

@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ (checklist | async)?.name }}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only menuToggle="TipMenu">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding #content>
+    <ion-list>
+        <ion-item>
+            <ion-input type="text" placeholder="Informe um item a ser adicionado" [(ngModel)]="itemValue"></ion-input>
+            <!--<button ion-button clear item-right (click)="searchList()"><i class="fa fa-search" style="font-size: large"></i></button>-->
+        </ion-item>
+        <ion-item>
+            <button ion-button full (click)="createChecklistItem(itemValue)">Adicionar na Lista</button>
+        </ion-item>
+        <ion-item *ngFor="let item of checklistItems | async">
+            <ion-label>{{ item.name }}</ion-label>
+            <ion-checkbox [ngModel]="item.checked" (click)="toggleChecklistItemChecked(item)"></ion-checkbox>
+            <button ion-button clear item-right (click)="editChecklistItem(item)"><i class="fa fa-pencil" style="font-size: large"></i></button>
+            <button ion-button clear item-right (click)="removeChecklistItem(item)"><i class="fa fa-trash" style="font-size: large"></i></button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <div>
+        <button ion-button full (click)="shareChecklist()">Compartilhar Lista</button>
+    </div>
+</ion-footer>
+
+<ion-menu id="TipMenu" persistent="true" side="right" [content]="content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button ion-item menuClose (click)="editChecklist()">
+                Editar Lista
+            </button>
+            <button ion-item menuClose (click)="clearChecklist()">
+                Limpar lista
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
