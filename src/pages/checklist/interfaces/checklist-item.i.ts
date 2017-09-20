@@ -1,5 +1,5 @@
 /**
- * Checklist interface.
+ * Checklist item interface.
  * 
  * @author Caio Frota <contato@caiofrota.com.br>
  * @version 1.0
