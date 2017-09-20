@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController, ToastController, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, ModalController, NavController, ToastController, Loading, LoadingController } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
-import { ChecklistController, ChecklistService, ChecklistStorageService, IChecklist } from '../checklist';
+import { ChecklistController, ChecklistEditController, ChecklistService, ChecklistStorageService, IChecklist } from '../checklist';
 
 @Component({
   selector: 'home',
@@ -26,6 +26,7 @@ export class HomeController implements OnInit {
                 private _navCtrl: NavController,
                 private _toastCtrl: ToastController,
                 private _loadingController: LoadingController,
+                private _modalController: ModalController,
                 private _checklistStorageService: ChecklistStorageService,
                 private _checklistService: ChecklistService) {
         // Do nothing.
@@ -102,11 +103,16 @@ export class HomeController implements OnInit {
         }
     }
 
+    public createChecklist_test(): void {
+        console.log(ChecklistEditController.name);
+        this._modalController.create(ChecklistEditController.name).present();
+    }
+
     /**
      * Show a popup to input a checklist key to create.
      */
     public createChecklist(): void {
-        this._alertController.create({
+        let alert: any = this._alertController.create({
             title: 'Criar Lista',
             message: 'Insira o título da lista a ser criada.<br/>Ex: Lista de Compras',
             inputs: [{
@@ -159,7 +165,8 @@ export class HomeController implements OnInit {
                     }
                 }
             ]
-        }).present();
+        });
+        alert.present();
     }
 
     /**
