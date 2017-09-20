@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AdMobPro } from '@ionic-native/admob-pro';
 
+import { MyAppAdMobConfig } from '../providers/app.config';
 import { HomeController } from '../pages/home';
 
 @Component({
@@ -22,18 +23,18 @@ export class MyApp {
             splashScreen.hide();
 
             this.admobId = {
-                    banner: '<banner>',
-                    interstitial: '<interstitial>'
+                    banner: MyAppAdMobConfig.others.banner,
+                    interstitial: MyAppAdMobConfig.others.interstitial
             };
             if (/(android)/i.test(navigator.userAgent)) {
                 this.admobId = {
-                    banner: '<banner>',
-                    interstitial: '<interstitial>'
+                    banner: MyAppAdMobConfig.android.banner,
+                    interstitial: MyAppAdMobConfig.android.interstitial
                 };
             } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
                 this.admobId = {
-                    banner: '<banner>',
-                    interstitial: '<interstitial>'
+                    banner: MyAppAdMobConfig.ios.banner,
+                    interstitial: MyAppAdMobConfig.ios.interstitial
                 };
             }
             
