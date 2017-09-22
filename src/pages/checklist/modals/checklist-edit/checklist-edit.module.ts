@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ChecklistEditController } from '../';
+import { ChecklistEditController } from '../../';
 
 @NgModule({
   declarations: [

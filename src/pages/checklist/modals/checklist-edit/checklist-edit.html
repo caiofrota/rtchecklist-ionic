@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Nova Lista</ion-title>
+        <ion-buttons end>
+        <button ion-button (click)="close()">Close</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Título</ion-label>
+            <ion-input type="text" name="title" [(ngModel)]="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Tipo</ion-label>
+            <ion-select [(ngModel)]="type" placeholder="Nenhum">
+                <ion-option value="shopping">Compras</ion-option>
+                <ion-option value="commitment">Compromissos</ion-option>
+                <ion-option value="account">Contas</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <div>
+        <button ion-button full (click)="save()">Salvar</button>
+    </div>
+</ion-footer>
