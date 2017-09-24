@@ -31,6 +31,7 @@
     "checklist.itemedit.name": "Item",
     "checklist.itemedit.shopping.quantity": "Quantity",
     "checklist.itemedit.shopping.value": "Price",
+    "checklist.itemedit.commitment.date": "Date",
     "checklist.itemedit.success": "Item updated successfully!",
     "checklist.itemedit.error.name.checklistkey.required": "\"Item\" is required.",
 

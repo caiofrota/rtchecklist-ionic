@@ -19,6 +19,7 @@ export class ChecklistItemEditController implements OnInit {
     public name: string;
     public quantity: number;
     public value: number;
+    public date: Date;
 
     /**
      * Constructor.
@@ -42,12 +43,15 @@ export class ChecklistItemEditController implements OnInit {
             this.showLoading();
             this.checklistItem.once('value', (value: any) => {
                 let oldChecklistItem: IChecklistItem = value.val();
-                console.log(oldChecklistItem);
                 let newChecklistItem: IChecklistItem;
-                if (this.checklistType) {
+                if (this.checklistType == EChecklistType.SHOPPING) {
                     let checklistItem: IChecklistItemShopping = { name: this.name, checked: oldChecklistItem.checked };
                     checklistItem.quantity = (this.quantity) ? this.quantity : null;
                     checklistItem.value = (this.value) ? this.value : null;
+                    newChecklistItem = checklistItem;
+                } else if (this.checklistType == EChecklistType.COMMITMENT) {
+                    let checklistItem: IChecklistItemCommitment = { name: this.name, checked: oldChecklistItem.checked };
+                    checklistItem.date = (this.date) ? this.date : null;
                     newChecklistItem = checklistItem;
                 } else {
                     let checklistItem: IChecklistItemShopping = { name: this.name, checked: oldChecklistItem.checked };
@@ -121,6 +125,10 @@ export class ChecklistItemEditController implements OnInit {
                     this.name = data.name;
                     this.quantity = data.quantity;
                     this.value = data.value;
+                } else if (EChecklistType.COMMITMENT == this.checklistType) {
+                    let data: IChecklistItemCommitment = value.val();
+                    this.name = data.name;
+                    this.date = data.date;
                 } else {
                     let data: IChecklistItem = value.val();
                     this.name = data.name;

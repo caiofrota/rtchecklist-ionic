@@ -19,14 +19,23 @@
             <button ion-button full (click)="createChecklistItem(itemValue)">Adicionar na Lista</button>
         </ion-item>
         <ion-item *ngFor="let item of checklistItems | async">
+            <!-- DEFAULT -->
             <ion-label *ngIf="!(checklist | async)?.type || (checklist | async)?.type == 0">
                 <span class="fdcl-checklist-item-label">{{ item.name }}</span>
             </ion-label>
+            <!-- SHOPPING -->
             <ion-label *ngIf="(checklist | async)?.type == 1">
                 <span class="fdcl-checklist-item-label fdcl-checklist-item-shopping-quantity" *ngIf="item.quantity">{{ item.quantity | number:'1.0-3' }}&nbsp;x</span>
                 <span class="fdcl-checklist-item-label">{{ item.name }}</span><br/>
                 <span class="fdcl-checklist-item-label fdcl-checklist-item-shopping-value" *ngIf="item.value">
                     {{ item.value | number:'1.2-2' }} <span *ngIf="item.quantity">(Total (x{{ item.quantity | number:'1.0-3' }}): {{ item.value * item.quantity | number:'1.2-2' }})</span>
+                </span>
+            </ion-label>
+            <!-- COMMITMENT -->
+            <ion-label *ngIf="(checklist | async)?.type == 2">
+                <span class="fdcl-checklist-item-label">{{ item.name }}</span><br/>
+                <span class="fdcl-checklist-item-label fdcl-checklist-item-commitment-date" *ngIf="item.date">
+                    {{ item.date | date }}
                 </span>
             </ion-label>
             <ion-checkbox [ngModel]="item.checked" (click)="toggleChecklistItemChecked(item)"></ion-checkbox>
