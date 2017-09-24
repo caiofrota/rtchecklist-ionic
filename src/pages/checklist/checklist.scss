@@ -1,4 +1,9 @@
 checklist {
+    .fdcl-checklist-item-label {
+        overflow: visible !important;
+        text-overflow: initial !important;
+        white-space: initial;
+    }
     .fdcl-footer.copyright {
         text-align: center;
     }

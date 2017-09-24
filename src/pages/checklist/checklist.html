@@ -19,7 +19,9 @@
             <button ion-button full (click)="createChecklistItem(itemValue)">Adicionar na Lista</button>
         </ion-item>
         <ion-item *ngFor="let item of checklistItems | async">
-            <ion-label>{{ item.name }}</ion-label>
+            <ion-label>
+                <span class="fdcl-checklist-item-label">{{ item.name }}</span>
+            </ion-label>
             <ion-checkbox [ngModel]="item.checked" (click)="toggleChecklistItemChecked(item)"></ion-checkbox>
             <button ion-button clear item-right (click)="editChecklistItem(item)"><i class="fa fa-pencil" style="font-size: large"></i></button>
             <button ion-button clear item-right (click)="removeChecklistItem(item)"><i class="fa fa-trash" style="font-size: large"></i></button>
