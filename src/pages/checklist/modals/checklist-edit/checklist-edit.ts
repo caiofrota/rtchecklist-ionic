@@ -37,7 +37,7 @@ export class ChecklistEditController implements OnInit {
     /**
      * Save checklist.
      */
-    public save(){
+    public save(): void {
         if (this.title) {
             this.showLoading();
             if (!this.isEdit) {
