@@ -78,26 +78,26 @@ export class ChecklistController implements OnInit {
      */
     public shareChecklist(): void {
         this._alertController.create({
-            title: 'Compartilhar Lista',
-            message: 'Copie o código da lista e compartilhe com quem você quiser!',
+            title: this._translate.instant('checklist.sharelist.title'),
+            message: this._translate.instant('checklist.sharelist.description'),
             inputs: [
                 {
                     name: 'checklistKey',
-                    placeholder: 'Chave da lista.',
+                    placeholder: this._translate.instant('checklist.sharelist.checklistkey'),
                     value: this.checklist.$ref.key
                 }
             ],
             buttons: [
                 {
-                    text: 'Cancelar',
+                    text: this._translate.instant('global.btn.cancel'),
                     handler: (data: any) => {  }
                 },
                 {
-                    text: 'Copiar!',
+                    text: this._translate.instant('global.btn.copy'),
                     handler: (data: any) => { 
                         this._clipboard.copy(data.checklistKey);
                         this._toastController.create({
-                            message: "Chave copiada para a área de transferência!",
+                            message: this._translate.instant('checklist.sharelist.copy.success'),
                             duration: 3000
                         }).present();
                     }
@@ -139,97 +139,32 @@ export class ChecklistController implements OnInit {
             });
         });
     }
-    public editChecklistItem_old(item: IChecklistItem): void {
-        this.checklist.$ref.child('items').once('value', (data) => {
-            let value: IChecklist = data.val();
-            let items = value;
-            this._alertController.create({
-                title: 'Editar lista',
-                inputs: [
-                    {
-                        label: 'Nome do item',
-                        name: 'name',
-                        placeholder: 'Nome do item.',
-                        value: value[item.$key].name
-                    }
-                ],
-                buttons: [
-                    {
-                        text: 'Cancelar',
-                        handler: (data: any) => {  }
-                    },
-                    {
-                        text: 'Salvar',
-                        handler: (data: any) => {
-                            if (data.name) {
-                                this._loading = this._loadingController.create({
-                                    content: 'Carregando...',
-                                    dismissOnPageChange: true
-                                });
-                                this._loading.present();
-                                items[item.$key].name = data.name;
-                                this.checklist.$ref.child('items').set(items).then((data: any) => {
-                                    this._loading.dismiss();
-                                    this._toastController.create({
-                                        message: "O item foi renomeado!",
-                                        duration: 3000
-                                    }).present();
-                                }, (error: any) => {
-                                    this._loading.dismiss();
-                                    this._toastController.create({
-                                        message: "Não foi possível editar o item da lista!",
-                                        duration: 3000
-                                    }).present();
-                                });
-                            } else {
-                                this.editChecklistItem(item);
-                                this._toastController.create({
-                                    message: 'O campo "Nome do item" é obrigatório.',
-                                    duration: 3000
-                                }).present();
-                            }
-                        }
-                    }
-                ]
-            }).present();
-        },
-        (error) => {
-            this._toastController.create({
-                message: "Ocorreu um erro ao tentar recuperar as infomações da lista, entre em contato com o administrador!",
-                duration: 3000
-            }).present();
-        })
-    }
 
     /**
      * Show a popup confirming clear list.
      */
     public clearChecklist(): void {
         this._alertController.create({
-            title: 'Limpar lista',
-            message: 'Deseja realmente remover todos os itens da lista?',
+            title: this._translate.instant('checklist.clearlist.title'),
+            message: this._translate.instant('checklist.clearlist.description'),
             buttons: [
                 {
-                    text: 'Cancelar'
+                    text: this._translate.instant('global.btn.cancel')
                 },
                 {
-                    text: 'Limpar lista',
+                    text: this._translate.instant('global.btn.clear'),
                     handler: () => {
-                        this._loading = this._loadingController.create({
-                            content: 'Carregando...',
-                            dismissOnPageChange: true
-                        });
-                        this._loading.present();
+                        this.showLoading();
                         this._checklistService.removeChecklistItems(this.checklist.$ref.key).then((data) => {
-                            this._loading.dismiss();
+                            this.hideLoading();
                             this._toastController.create({
-                                message: "A lista foi limpa com sucesso!",
+                                message: this._translate.instant('checklist.clearlist.clear.cuccess'),
                                 duration: 3000
                             }).present();
                         }, (error) => {
-                            this._loading.dismiss();
+                            this.hideLoading();
                             this._toastController.create({
-                                message: "Não foi possível limpar a lista!",
+                                message: this._translate.instant('global.error'),
                                 duration: 3000
                             }).present();
                         });
@@ -263,17 +198,13 @@ export class ChecklistController implements OnInit {
      * Update checklist and checklistItems.
      */
     ngOnInit(): void {
-        this._loading = this._loadingController.create({
-            content: 'Carregando...',
-            dismissOnPageChange: true
-        });
-        this._loading.present();
+        this.showLoading()
         this.checklist = this._navParams.get('checklist');
         this.checklistItems = this._checklistService.getChecklistItems(this.checklist);
         this.checklistItems.$ref.once('value', (value: any) => {
-            this._loading.dismiss();
+            this.hideLoading()
         }, (error: any) => {
-            this._loading.dismiss();
+            this.hideLoading()
         })
     }
 }

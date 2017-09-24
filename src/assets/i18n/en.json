@@ -34,9 +34,20 @@
     "checklist.itemedit.success": "Item updated successfully!",
     "checklist.itemedit.error.name.checklistkey.required": "\"Item\" is required.",
 
+    "checklist.clearlist.title": "Clear list",
+    "checklist.clearlist.description": "Do you really want to remove all items from the list?",
+    "checklist.clearlist.clear.cuccess": "The list has been successfully cleaned!",
+
+    "checklist.sharelist.title": "Share list",
+    "checklist.sharelist.description": "Copy the checklist key and share it with anyone!",
+    "checklist.sharelist.checklistkey": "Checklist key",
+    "checklist.sharelist.copy.cuccess": "Checklist key copied to clipboard!",
+
     "global.lbl.search": "Search",
     "global.lbl.loading": "Loading...",
     "global.btn.cancel": "Cancel",
+    "global.btn.copy": "Copy!",
+    "global.btn.clear": "Clear",
     "global.btn.close": "Close",
     "global.btn.import": "Import",
     "global.btn.save": "Save",
