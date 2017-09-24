@@ -89,11 +89,12 @@ export class ChecklistService {
     /**
      * Get checklist items.
      * 
-     * @param string key Checklist key.
+     * @param FarebaseObjectObservable<IChecklist> item Checklist key.
      * @return FirebaseListObservable<IChecklistItem> Checklist observable.
      */
-    public getChecklistItems(key: string): FirebaseListObservable<any> {
-        return this._firebase.list('/checklists/' + key + '/items');
+    public getChecklistItems(item: FirebaseObjectObservable<IChecklist>): FirebaseListObservable<any> {
+        item.$ref.child('last_access_on').set(new Date().getTime()).then((data: any) => {});
+        return this._firebase.list('/checklists/' + item.$ref.key + '/items');
     }
 
     /**

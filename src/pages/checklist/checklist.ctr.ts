@@ -15,6 +15,7 @@ import { IChecklist, IChecklistItem, ChecklistService } from './'
     templateUrl: 'checklist.html'
 })
 export class ChecklistController implements OnInit {
+    // Controller attributes.
     private _loading: Loading;
 
     // Page attributes.
@@ -280,7 +281,7 @@ export class ChecklistController implements OnInit {
         });
         this._loading.present();
         this.checklist = this._navParams.get('checklist');
-        this.checklistItems = this._checklistService.getChecklistItems(this.checklist.$ref.key);
+        this.checklistItems = this._checklistService.getChecklistItems(this.checklist);
         this.checklistItems.$ref.once('value', (value: any) => {
             this._loading.dismiss();
         }, (error: any) => {
