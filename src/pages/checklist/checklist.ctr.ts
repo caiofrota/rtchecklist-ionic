@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavParams, ToastController, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, LoadingController, ModalController, NavParams, ToastController, Loading, Modal } from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { IChecklist, IChecklistItem, ChecklistService } from './'
+import { ChecklistService, ChecklistEditController, IChecklist, IChecklistItem } from './'
 
 /**
  * Checklist Controller.
@@ -30,12 +30,13 @@ export class ChecklistController implements OnInit {
      * @param NavParams _navParams Navigation Parameters.
      * @param ChecklistService _checklistService Checklist Service.
      */
-    constructor(private _clipboard: Clipboard,
+    constructor(private _alertController: AlertController,
+                private _clipboard: Clipboard,
                 private _navParams: NavParams,
-                private _toastController: ToastController,
                 private _loadingController: LoadingController,
-                private _checklistService: ChecklistService,
-                private _alertController: AlertController) {
+                private _modalController: ModalController,
+                private _toastController: ToastController,
+                private _checklistService: ChecklistService,) {
         // Do nothing.
     }
 
@@ -107,6 +108,10 @@ export class ChecklistController implements OnInit {
      * Show a popup with list informations.
      */
     public editChecklist(): void {
+        let modal: Modal = this._modalController.create(ChecklistEditController.name, { checklist: this.checklist });
+        modal.present();
+    }
+    public editChecklist_old(): void {
         this.checklist.$ref.once('value', (data) => {
             let value: IChecklist = data.val();
             this._alertController.create({

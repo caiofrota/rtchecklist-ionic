@@ -11,7 +11,8 @@
     "home.importlist.error.checklistkey.required": "\"List key\" is required.",
     "home.importlist.error.notfount": "The list was not found!",
 
-    "home.checklist.checklistEdit.title": "New lista",
+    "home.checklist.checklistEdit.title.new": "New lista",
+    "home.checklist.checklistEdit.title.edit": "Edit lista",
     "home.checklist.checklistEdit.listtitle": "Title",
     "home.checklist.checklistEdit.listtype": "Type",
     "home.checklist.checklistEdit.listtype.none": "None",

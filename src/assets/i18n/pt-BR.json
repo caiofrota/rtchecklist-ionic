@@ -11,7 +11,8 @@
     "home.importlist.error.checklistkey.required": "O campo \"Chave da lista\" é obrigatório.",
     "home.importlist.error.notfount": "A lista não foi encontrada!",
 
-    "home.checklist.checklistEdit.title": "Nova lista",
+    "home.checklist.checklistEdit.title.new": "Nova lista",
+    "home.checklist.checklistEdit.title.edit": "Editar lista",
     "home.checklist.checklistEdit.listtitle": "Título",
     "home.checklist.checklistEdit.listtype": "Tipo",
     "home.checklist.checklistEdit.listtype.none": "Nenhum",
@@ -20,7 +21,8 @@
     "home.checklist.checklistEdit.listtype.accounts": "Contas",
     "home.checklist.checklistEdit.listpermanent": "Permanente",
     "home.checklist.checklistEdit.listpermanent.hint": "Listas não permanentes serão apagadas após algum tempo sem uso.",
-    "home.checklist.checklistEdit.success": "Lista criada com sucesso!",
+    "home.checklist.checklistEdit.success.new": "Lista criada com sucesso!",
+    "home.checklist.checklistEdit.success.edit": "Lista atualizada com sucesso!",
     "home.checklist.checklistEdit.error.title.required": "O \"Título\" é obrigatório",
 
     "global.lbl.search": "Pesquisar",

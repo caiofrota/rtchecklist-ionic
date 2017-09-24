@@ -36,8 +36,9 @@ export class ChecklistService {
      * Return FirebaseObjectObservable<IChecklist> when success.
      * Return any when error.
      * 
-     * @param checklistName Checklist name.
-     * @param permanent If true, this list won't be removed.
+     * @param string checklistName Checklist name.
+     * @param EChecklist type? List type.
+     * @param boolean permanent If true, this list won't be removed.
      * @return any Observable.
      */
     public createChecklist(checklistName: string, type?: EChecklistType, permanent?: boolean): any {

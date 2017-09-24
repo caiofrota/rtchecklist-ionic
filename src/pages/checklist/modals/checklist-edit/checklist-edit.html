@@ -1,6 +1,7 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{ 'home.checklist.checklistEdit.title' | translate }}</ion-title>
+        <ion-title *ngIf="!isEdit">{{ 'home.checklist.checklistEdit.title.new' | translate }}</ion-title>
+        <ion-title *ngIf="isEdit">{{ 'home.checklist.checklistEdit.title.edit' | translate }}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="close()">{{ 'global.btn.close' | translate }}</button>
         </ion-buttons>
@@ -15,7 +16,9 @@
         </ion-item>
         <ion-item>
             <ion-label>{{ 'home.checklist.checklistEdit.listtype' | translate }}</ion-label>
+            <ion-input *ngIf="type < 0" [(ngModel)]="type"></ion-input>
             <ion-select [(ngModel)]="type" placeholder="{{ 'home.checklist.checklistEdit.listtype.none' | translate }}">
+                <ion-option value="0">{{ 'home.checklist.checklistEdit.listtype.none' | translate }}</ion-option>
                 <ion-option value="1">{{ 'home.checklist.checklistEdit.listtype.shopping' | translate }}</ion-option>
                 <ion-option value="2">{{ 'home.checklist.checklistEdit.listtype.commitments' | translate }}</ion-option>
                 <ion-option value="3">{{ 'home.checklist.checklistEdit.listtype.accounts' | translate }}</ion-option>
