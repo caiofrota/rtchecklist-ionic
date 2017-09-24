@@ -11,7 +11,7 @@
         </ion-item>
         <ion-item *ngFor="let checklist of filteredItems" (click)="editList(checklist)">
             <ion-spinner *ngIf="!(checklist | async)?.name" color="primary" text-center name="crescent"></ion-spinner>
-            {{ (checklist | async)?.name }}
+            <span class="checklist-label">{{ (checklist | async)?.name }}</span>
             <button ion-button clear item-right (click)="removeList(checklist)"><i class="fa fa-trash" style="font-size: large"></i></button>
         </ion-item>
     </ion-list>
