@@ -11,7 +11,7 @@
         </ion-item>
         <ion-item *ngFor="let checklist of filteredItems" (click)="editList(checklist)">
             <ion-spinner *ngIf="!(checklist | async)?.name" color="primary" text-center name="crescent"></ion-spinner>
-            <i class="fa fa-list fdcl-checklist-icon" *ngIf="(checklist | async)?.name && !(checklist | async)?.type"></i>
+            <i class="fa fa-list fdcl-checklist-icon" *ngIf="(checklist | async)?.name && (!(checklist | async)?.type || (checklist | async)?.type == 0)"></i>
             <i class="fa fa-shopping-cart fdcl-checklist-icon" *ngIf="(checklist | async)?.name && (checklist | async)?.type == 1"></i>
             <i class="fa fa-calendar fdcl-checklist-icon" *ngIf="(checklist | async)?.name && (checklist | async)?.type == 2"></i>
             <i class="fa fa-money fdcl-checklist-icon" *ngIf="(checklist | async)?.name && (checklist | async)?.type == 3"></i>

@@ -27,6 +27,13 @@
     "home.checklist.checklistImport.error.checklistkey.required": "\"List key\" is required.",
     "home.checklist.checklistImport.error.notfount": "The list was not found!",
 
+    "checklist.itemedit.title": "Edit item",
+    "checklist.itemedit.name": "Item",
+    "checklist.itemedit.shopping.quantity": "Quantity",
+    "checklist.itemedit.shopping.value": "Price",
+    "checklist.itemedit.success": "Item updated successfully!",
+    "checklist.itemedit.error.name.checklistkey.required": "\"Item\" is required.",
+
     "global.lbl.search": "Search",
     "global.lbl.loading": "Loading...",
     "global.btn.cancel": "Cancel",

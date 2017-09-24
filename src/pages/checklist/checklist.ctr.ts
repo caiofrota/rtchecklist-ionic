@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ModalController, NavParams, ToastController, Loading, Modal } from 'ionic-angular';
 import { Clipboard } from '@ionic-native/clipboard';
+import { TranslateService } from '@ngx-translate/core';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { ChecklistService, ChecklistEditController, IChecklist, IChecklistItem } from './'
+import { ChecklistService, ChecklistEditController, ChecklistItemEditController, IChecklist, IChecklistItem } from './'
 
 /**
  * Checklist Controller.
@@ -32,11 +33,12 @@ export class ChecklistController implements OnInit {
      */
     constructor(private _alertController: AlertController,
                 private _clipboard: Clipboard,
-                private _navParams: NavParams,
                 private _loadingController: LoadingController,
                 private _modalController: ModalController,
+                private _navParams: NavParams,
                 private _toastController: ToastController,
-                private _checklistService: ChecklistService,) {
+                private _translate: TranslateService,
+                private _checklistService: ChecklistService) {
         // Do nothing.
     }
 
@@ -116,6 +118,28 @@ export class ChecklistController implements OnInit {
      * Show a popup with list informations.
      */
     public editChecklistItem(item: IChecklistItem): void {
+        this.showLoading();
+        this.checklist.$ref.once('value', (value) => {
+            this.hideLoading();
+            let data: IChecklist = value.val();
+            if (data) {
+                let modal: Modal = this._modalController.create(ChecklistItemEditController.name, { checklistType: data.type, checklistItem: this.checklist.$ref.child('items').child(item.$key) });
+                modal.present();
+            } else {
+                this._toastController.create({
+                    message: this._translate.instant('global.error'),
+                    duration: 3000
+                });
+            }
+        }, (error) => {
+            this.hideLoading();
+            this._toastController.create({
+                message: this._translate.instant('global.error'),
+                duration: 3000
+            });
+        });
+    }
+    public editChecklistItem_old(item: IChecklistItem): void {
         this.checklist.$ref.child('items').once('value', (data) => {
             let value: IChecklist = data.val();
             let items = value;
@@ -213,6 +237,24 @@ export class ChecklistController implements OnInit {
                 }
             ]
         }).present();
+    }
+
+    /**
+     * Show loading dialog.
+     */
+    private showLoading(): void {
+        this._loading = this._loadingController.create({
+            content: this._translate.instant('global.lbl.loading'),
+            dismissOnPageChange: true
+        });
+        this._loading.present();
+    }
+
+    /**
+     * Hide loading dialog.
+     */
+    private hideLoading(): void {
+        this._loading.dismiss();
     }
 
     /**

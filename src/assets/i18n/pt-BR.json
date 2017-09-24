@@ -27,6 +27,13 @@
     "home.checklist.checklistImport.error.checklistkey.required": "O campo \"Chave da lista\" é obrigatório.",
     "home.checklist.checklistImport.error.notfount": "A lista não foi encontrada!",
 
+    "checklist.itemedit.title": "Editar item",
+    "checklist.itemedit.name": "Item",
+    "checklist.itemedit.shopping.quantity": "Quantidade",
+    "checklist.itemedit.shopping.value": "Preço",
+    "checklist.itemedit.success": "Item atualizada com sucesso!",
+    "checklist.itemedit.error.name.checklistkey.required": "O campo \"Item\" é obrigatório.",
+
     "global.lbl.search": "Pesquisar",
     "global.lbl.loading": "Carregando...",
     "global.btn.cancel": "Cancelar",
