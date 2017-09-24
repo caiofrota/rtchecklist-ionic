@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title *ngIf="!isEdit">{{ 'checklist.itemedit.title' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="close()">{{ 'global.btn.close' | translate }}</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>{{ 'checklist.itemedit.name' | translate }}</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="checklistType == 1">
+            <ion-label>{{ 'checklist.itemedit.shopping.quantity' | translate }}</ion-label>
+            <ion-input type="number" name="quantity" [(ngModel)]="quantity"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="checklistType == 1">
+            <ion-label>{{ 'checklist.itemedit.shopping.value' | translate }}</ion-label>
+            <ion-input type="number" name="value" [(ngModel)]="value" step="0.01"></ion-input>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <div>
+        <button ion-button full (click)="save()">{{ 'global.btn.save' | translate }}</button>
+    </div>
+</ion-footer>
