@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Keyboard } from '@ionic-native/keyboard';
 import { Clipboard } from '@ionic-native/clipboard';
 import { AdMobPro } from '@ionic-native/admob-pro';
 
@@ -53,6 +54,7 @@ import { MyApp } from './app.component';
         StatusBar,
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
+        Keyboard,
         AdMobPro,
         Clipboard,
         ChecklistStorageService,

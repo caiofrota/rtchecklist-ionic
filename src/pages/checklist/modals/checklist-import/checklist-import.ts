@@ -40,13 +40,13 @@ export class ChecklistImportController implements OnInit {
                 if (value) {
                     this._checklistStorageService.addChecklistKey(this.checklistKey);
                     this._toastController.create({
-                        message: this._translate.instant('home.importlist.success'),
+                        message: this._translate.instant('home.checklist.checklistImport.success'),
                         duration: 3000
                     }).present();
                     this.close();
                 } else {
                     this._toastController.create({
-                        message: this._translate.instant('home.importlist.error.notfount'),
+                        message: this._translate.instant('home.checklist.checklistImport.error.notfount'),
                         duration: 3000
                     }).present();
                 }
@@ -59,7 +59,7 @@ export class ChecklistImportController implements OnInit {
             })
         } else {
             this._toastController.create({
-                message: this._translate.instant('home.importlist.error.checklistkey.required'),
+                message: this._translate.instant('home.checklist.checklistImport.error.checklistkey.required'),
                 duration: 3000
             }).present();
         }

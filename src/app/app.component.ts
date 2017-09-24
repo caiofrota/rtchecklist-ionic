@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -20,6 +21,7 @@ export class MyApp {
     constructor(platform: Platform,
                 statusBar: StatusBar,
                 splashScreen: SplashScreen,
+                keyboard: Keyboard,
                 translate: TranslateService,
                 AdMobPro: AdMobPro) {
         translate.setDefaultLang('en');
@@ -31,9 +33,16 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
+            keyboard.onKeyboardShow().subscribe(() => {
+                document.body.classList.add('keyboard-is-open');
+            });
+            keyboard.onKeyboardHide().subscribe(() => {
+                document.body.classList.remove('keyboard-is-open');
+            });
+            
             this.admobId = {
-                    banner: MyAppAdMobConfig.others.banner,
-                    interstitial: MyAppAdMobConfig.others.interstitial
+                banner: MyAppAdMobConfig.others.banner,
+                interstitial: MyAppAdMobConfig.others.interstitial
             };
             if (/(android)/i.test(navigator.userAgent)) {
                 this.admobId = {
