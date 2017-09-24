@@ -1,0 +1,34 @@
+{
+    "app.name": "Checklist",
+
+    "home.nolists": "Você ainda não possui listas! Crie ou importe usando os botões abaixo!",
+    "home.btn.newlist": "Criar Lista",
+    "home.btn.importlist": "Importar Lista",
+    "home.importlist.title": "Importar Lista",
+    "home.importlist.description": "Cole o código da lista que deseja importar.<br/>Ex: -KsnibokCYzTcCG4tp8p",
+    "home.importlist.checklistkey": "Chave da lista",
+    "home.importlist.success": "Lista importada com sucesso!",
+    "home.importlist.error.checklistkey.required": "O campo \"Chave da lista\" é obrigatório.",
+    "home.importlist.error.notfount": "A lista não foi encontrada!",
+
+    "home.checklist.checklistEdit.title": "Nova lista",
+    "home.checklist.checklistEdit.listtitle": "Título",
+    "home.checklist.checklistEdit.listtype": "Tipo",
+    "home.checklist.checklistEdit.listtype.none": "Nenhum",
+    "home.checklist.checklistEdit.listtype.shopping": "Compras",
+    "home.checklist.checklistEdit.listtype.commitments": "Compromissos",
+    "home.checklist.checklistEdit.listtype.accounts": "Contas",
+    "home.checklist.checklistEdit.listpermanent": "Permanente",
+    "home.checklist.checklistEdit.listpermanent.hint": "Listas não permanentes serão apagadas após algum tempo sem uso.",
+    "home.checklist.checklistEdit.success": "Lista criada com sucesso!",
+    "home.checklist.checklistEdit.error.title.required": "O \"Título\" é obrigatório",
+
+    "global.lbl.search": "Pesquisar",
+    "global.lbl.loading": "Carregando...",
+    "global.btn.cancel": "Cancelar",
+    "global.btn.close": "Fechar",
+    "global.btn.import": "Importar",
+    "global.btn.save": "Salvar",
+    
+    "global.error": "Ocorreu um erro ao tentar efetuar a operação. Por favor, tente novamente."
+}

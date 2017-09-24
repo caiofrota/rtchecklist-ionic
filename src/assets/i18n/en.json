@@ -1,0 +1,34 @@
+{
+    "app.name": "Checklist",
+
+    "home.nolists": "You have no lists yet! Create or import using the buttons below!",
+    "home.btn.newlist": "New List",
+    "home.btn.importlist": "Import List",
+    "home.importlist.title": "Import List",
+    "home.importlist.description": "Paste the list key you want to import.<br/>E.g.: -KsnibokCYzTcCG4tp8p",
+    "home.importlist.checklistkey": "List key",
+    "home.importlist.success": "List imported successfully!",
+    "home.importlist.error.checklistkey.required": "\"List key\" is required.",
+    "home.importlist.error.notfount": "The list was not found!",
+
+    "home.checklist.checklistEdit.title": "New lista",
+    "home.checklist.checklistEdit.listtitle": "Title",
+    "home.checklist.checklistEdit.listtype": "Type",
+    "home.checklist.checklistEdit.listtype.none": "None",
+    "home.checklist.checklistEdit.listtype.shopping": "Shopping",
+    "home.checklist.checklistEdit.listtype.commitments": "Commitments",
+    "home.checklist.checklistEdit.listtype.accounts": "Accounts",
+    "home.checklist.checklistEdit.listpermanent": "Permanent",
+    "home.checklist.checklistEdit.listpermanent.hint": "Non-permanent lists will be deleted after some unused time.",
+    "home.checklist.checklistEdit.success": "List created successfully!",
+    "home.checklist.checklistEdit.error.title.required": "\"List title\" is required.",
+
+    "global.lbl.search": "Search",
+    "global.lbl.loading": "Loading...",
+    "global.btn.cancel": "Cancel",
+    "global.btn.close": "Close",
+    "global.btn.import": "Import",
+    "global.btn.save": "Save",
+
+    "global.error": "There was an error while trying to perform the operation. Please try again."
+}

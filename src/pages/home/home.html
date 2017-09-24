@@ -1,13 +1,13 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Checklist</ion-title>
+        <ion-title>{{ 'app.name' | translate }}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list [hidden]="items.length == 0">
         <ion-item>
-            <ion-searchbar [(ngModel)]="filter" (ionInput)="filterItems()" placeholder="Pesquisar"></ion-searchbar>
+            <ion-searchbar [(ngModel)]="filter" (ionInput)="filterItems()" placeholder="{{ 'global.lbl.search' | translate }}"></ion-searchbar>
         </ion-item>
         <ion-item *ngFor="let checklist of filteredItems" (click)="editList(checklist)">
             <ion-spinner *ngIf="!(checklist | async)?.name" color="primary" text-center name="crescent"></ion-spinner>
@@ -16,16 +16,16 @@
         </ion-item>
     </ion-list>
     <div class="fdcl-nolist" [hidden]="items.length != 0">
-        Você não possui listas! Criei ou importe nos botões abaixo!
+        {{ 'home.nolists' | translate }}
         <img src="assets/img/arrows-choice.png" />
     </div>
 </ion-content>
 
 <ion-footer>
     <div class="fdcl-footer btn-left">
-        <button ion-button full (click)="createChecklist()">Criar Lista</button>
+        <button ion-button full (click)="createChecklist()">{{ 'home.btn.newlist' | translate }}</button>
     </div>
     <div class="fdcl-footer btn-right">
-        <button ion-button full (click)="importChecklist()">Importar Lista</button>
+        <button ion-button full (click)="importChecklist()">{{ 'home.btn.importlist' | translate }}</button>
     </div>
 </ion-footer>
