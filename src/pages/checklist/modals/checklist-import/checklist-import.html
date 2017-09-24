@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'home.checklist.checklistImport.title' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="close()">{{ 'global.btn.close' | translate }}</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <span>
+            {{ 'home.checklist.checklistImport.description' | translate }}<br/>
+            {{ 'home.checklist.checklistImport.description.eg' | translate }}
+        </span>
+        <ion-item>
+            <ion-input type="text" name="checklistKey" [(ngModel)]="checklistKey" placeholder="{{ 'home.checklist.checklistImport.checklistkey' | translate }}"></ion-input>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <div>
+        <button ion-button full (click)="import()">{{ 'global.btn.import' | translate }}</button>
+    </div>
+</ion-footer>

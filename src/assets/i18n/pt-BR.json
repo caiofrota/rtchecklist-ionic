@@ -4,12 +4,6 @@
     "home.nolists": "Você ainda não possui listas! Crie ou importe usando os botões abaixo!",
     "home.btn.newlist": "Criar Lista",
     "home.btn.importlist": "Importar Lista",
-    "home.importlist.title": "Importar Lista",
-    "home.importlist.description": "Cole o código da lista que deseja importar.<br/>Ex: -KsnibokCYzTcCG4tp8p",
-    "home.importlist.checklistkey": "Chave da lista",
-    "home.importlist.success": "Lista importada com sucesso!",
-    "home.importlist.error.checklistkey.required": "O campo \"Chave da lista\" é obrigatório.",
-    "home.importlist.error.notfount": "A lista não foi encontrada!",
 
     "home.checklist.checklistEdit.title.new": "Nova lista",
     "home.checklist.checklistEdit.title.edit": "Editar lista",
@@ -24,6 +18,14 @@
     "home.checklist.checklistEdit.success.new": "Lista criada com sucesso!",
     "home.checklist.checklistEdit.success.edit": "Lista atualizada com sucesso!",
     "home.checklist.checklistEdit.error.title.required": "O \"Título\" é obrigatório",
+
+    "home.checklist.checklistImport.title": "Importar lista",
+    "home.checklist.checklistImport.description": "Cole o código da lista que deseja importar.",
+    "home.checklist.checklistImport.description.eg": "Ex: -KsnibokCYzTcCG4tp8p",
+    "home.checklist.checklistImport.checklistkey": "Chave da lista",
+    "home.checklist.checklistImport.success": "Lista importada com sucesso!",
+    "home.checklist.checklistImport.error.checklistkey.required": "O campo \"Chave da lista\" é obrigatório.",
+    "home.checklist.checklistImport.error.notfount": "A lista não foi encontrada!",
 
     "global.lbl.search": "Pesquisar",
     "global.lbl.loading": "Carregando...",

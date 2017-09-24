@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, ModalController, NavController, ToastController, Loading, Modal } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
-import { ChecklistController, ChecklistService, ChecklistStorageService, ChecklistEditController, IChecklist } from '../checklist';
+import { ChecklistController, ChecklistService, ChecklistStorageService, ChecklistEditController, ChecklistImportController, IChecklist } from '../checklist';
 
 @Component({
   selector: 'home',
@@ -112,60 +112,12 @@ export class HomeController implements OnInit {
     }
 
     /**
-     * Show a popup to input a checklist key to import.
+     * Show a modal page to import a checklist.
      */
     public importChecklist(): void {
-        this._alertController.create({
-            title: this._translate.instant('home.importlist.title'),
-            message: this._translate.instant('home.importlist.description'),
-            inputs: [{
-                name: 'checklistKey',
-                placeholder: this._translate.instant('home.importlist.checklistkey')
-            }],
-            buttons: [
-                {
-                    text: this._translate.instant('global.btn.cancel'),
-                    handler: (data: any) => { }
-                },
-                {
-                    text: this._translate.instant('global.btn.import'),
-                    handler: (data: any) => {
-                        if (data.checklistKey) {
-                            this.showLoading();
-                            this._checklistService.getChecklist(data.checklistKey).$ref.once('value', (ref: any) => {
-                                let value: IChecklist = ref.val();
-                                this.hideLoading();
-                                if (value) {
-                                    this._checklistStorageService.addChecklistKey(data.checklistKey);
-                                    this.loadItems();
-                                    this._toastController.create({
-                                        message: this._translate.instant('home.importlist.success'),
-                                        duration: 3000
-                                    }).present();
-                                } else {
-                                    this._toastController.create({
-                                        message: this._translate.instant('home.importlist.error.notfount'),
-                                        duration: 3000
-                                    }).present();
-                                }
-                            }, (error: any) => {
-                                this.hideLoading();
-                                this._toastController.create({
-                                    message: this._translate.instant('global.error'),
-                                    duration: 3000
-                                }).present();
-                            })
-                        } else {
-                            this.importChecklist();
-                            this._toastController.create({
-                                message: this._translate.instant('home.importlist.error.checklistkey.required'),
-                                duration: 3000
-                            }).present();
-                        }
-                    }
-                }
-            ]
-        }).present();
+        let modal: Modal = this._modalController.create(ChecklistImportController.name);
+        modal.onDidDismiss(() => { this.loadItems() });
+        modal.present();
     }
 
     /**
