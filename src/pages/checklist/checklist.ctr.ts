@@ -111,65 +111,6 @@ export class ChecklistController implements OnInit {
         let modal: Modal = this._modalController.create(ChecklistEditController.name, { checklist: this.checklist });
         modal.present();
     }
-    public editChecklist_old(): void {
-        this.checklist.$ref.once('value', (data) => {
-            let value: IChecklist = data.val();
-            this._alertController.create({
-                title: 'Editar lista',
-                inputs: [
-                    {
-                        label: 'Título',
-                        name: 'title',
-                        placeholder: 'Título da Lista.',
-                        value: value.name
-                    }
-                ],
-                buttons: [
-                    {
-                        text: 'Cancelar',
-                        handler: (data: any) => {  }
-                    },
-                    {
-                        text: 'Salvar',
-                        handler: (data: any) => {
-                            if (data.title) {
-                                this._loading = this._loadingController.create({
-                                    content: 'Carregando...',
-                                    dismissOnPageChange: true
-                                });
-                                this._loading.present();
-                                this.checklist.$ref.child('name').set(data.title).then((data: any) => {
-                                    this._loading.dismiss();
-                                    this._toastController.create({
-                                        message: "A lista foi renomeada!",
-                                        duration: 3000
-                                    }).present();
-                                }, (error: any) => {
-                                    this._loading.dismiss();
-                                    this._toastController.create({
-                                        message: "Não foi possível editar a lista!",
-                                        duration: 3000
-                                    }).present();
-                                });
-                            } else {
-                                this.editChecklist();
-                                this._toastController.create({
-                                    message: 'O campo "Título da lista" é obrigatório.',
-                                    duration: 3000
-                                }).present();
-                            }
-                        }
-                    }
-                ]
-            }).present();
-        },
-        (error) => {
-            this._toastController.create({
-                message: "Ocorreu um erro ao tentar recuperar as infomações da lista, entre em contato com o administrador!",
-                duration: 3000
-            }).present();
-        })
-    }
 
     /**
      * Show a popup with list informations.
