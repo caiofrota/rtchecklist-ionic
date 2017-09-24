@@ -1,75 +1,100 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ViewController, NavParams, IonicPage, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
-import { ChecklistStorageService, ChecklistService, IChecklist, ChecklistController } from '../../';
+import { TranslateService } from '@ngx-translate/core';
+import { ChecklistStorageService, ChecklistService, ChecklistController, IChecklist, EChecklistType } from '../../';
 
 @IonicPage()
 @Component({
     selector: 'checklist-edit',
     templateUrl: 'checklist-edit.html',
 })
-export class ChecklistEditController {
+export class ChecklistEditController implements OnInit {
+    // Controller attributes.
     private _loading: Loading;
 
     // Page attributes.
     public title: string;
-    public type: string;
+    public type: EChecklistType;
+    public permanent: boolean;
 
-    constructor(private _navCtrl: NavController,
-                private viewCtrl: ViewController,
-                private navParams: NavParams,
-                private _toastCtrl: ToastController,
-                private _loadingController: LoadingController,
+    /**
+     * Constructor.
+     */
+    constructor(private _loadingController: LoadingController,
+                private _navController: NavController,
+                private _navParams: NavParams,
+                private _toastController: ToastController,
+                private _translate: TranslateService,
+                private _viewController: ViewController,
                 private _checklistStorageService: ChecklistStorageService,
                 private _checklistService: ChecklistService) {
+        // Do nothing.
     }
 
+    /**
+     * Save checklist.
+     */
     public save(){
-        this._loading = this._loadingController.create({
-            content: 'Carregando...',
-            dismissOnPageChange: true
-        });
-        this._loading.present();
         if (this.title) {
-            this._checklistService.createChecklist(this.title).subscribe(
+            this.showLoading();
+            this._checklistService.createChecklist(this.title, this.type, this.permanent).subscribe(
                 (checklist: FirebaseObjectObservable<IChecklist>) => {
                     this._checklistStorageService.addChecklistKey(checklist.$ref.key);
-                    //this.loadItems();
-                    this._navCtrl.push(ChecklistController, { checklist });
-                    this._loading.dismiss();
-                    let toast: any = this._toastCtrl.create({
-                        message: 'Lista criada com sucesso.',
+                    this._navController.push(ChecklistController, { checklist });
+                    this.hideLoading();
+                    this._toastController.create({
+                        message: this._translate.instant('home.checklist.checklistEdit.success'),
                         duration: 3000
-                    });
-                    toast.present();
+                    }).present();
                     this.close();
                 },
                 (error) => {
-                    this._loading.dismiss();
-                    let toast: any = this._toastCtrl.create({
-                        message: 'Ocorreu um erro na criação da lista.',
+                    this.hideLoading();
+                    this._toastController.create({
+                        message: this._translate.instant('global.error'),
                         duration: 3000
-                    });
-                    toast.present();
+                    }).present();
                 }
             );
         } else {
-            this._loading.dismiss();
-            this._toastCtrl.create({
-                message: 'O campo "Título da lista" é obrigatório.',
+            this._toastController.create({
+                message: this._translate.instant('home.checklist.checklistEdit.error.title.required'),
                 duration: 3000
             }).present();
         }
     }
 
     /**
-     * Close page.
+     * Show loading dialog.
      */
-    public close(){
-        this.viewCtrl.dismiss();
+    private showLoading(): void {
+        this._loading = this._loadingController.create({
+            content: this._translate.instant('global.lbl.loading'),
+            dismissOnPageChange: true
+        });
+        this._loading.present();
     }
 
-    ionViewDidLoad() {
-        
+    /**
+     * Hide loading dialog.
+     */
+    private hideLoading(): void {
+        this._loading.dismiss();
+    }
+
+    /**
+     * Close page.
+     */
+    public close(): void {
+        this._viewController.dismiss();
+    }
+
+    /**
+     * Post-constructor.
+     */
+    ngOnInit(): void {
+        this._translate.setDefaultLang('en');
+        this._translate.use(navigator.language);
     }
 }  

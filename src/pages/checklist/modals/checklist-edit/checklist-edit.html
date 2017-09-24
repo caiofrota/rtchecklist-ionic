@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Nova Lista</ion-title>
+        <ion-title>{{ 'home.checklist.checklistEdit.title' | translate }}</ion-title>
         <ion-buttons end>
-        <button ion-button (click)="close()">Close</button>
+            <button ion-button (click)="close()">{{ 'global.btn.close' | translate }}</button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -10,22 +10,29 @@
 <ion-content padding>
     <ion-list>
         <ion-item>
-            <ion-label>Título</ion-label>
+            <ion-label>{{ 'home.checklist.checklistEdit.listtitle' | translate }}</ion-label>
             <ion-input type="text" name="title" [(ngModel)]="title"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Tipo</ion-label>
-            <ion-select [(ngModel)]="type" placeholder="Nenhum">
-                <ion-option value="shopping">Compras</ion-option>
-                <ion-option value="commitment">Compromissos</ion-option>
-                <ion-option value="account">Contas</ion-option>
+            <ion-label>{{ 'home.checklist.checklistEdit.listtype' | translate }}</ion-label>
+            <ion-select [(ngModel)]="type" placeholder="{{ 'home.checklist.checklistEdit.listtype.none' | translate }}">
+                <ion-option value="1">{{ 'home.checklist.checklistEdit.listtype.shopping' | translate }}</ion-option>
+                <ion-option value="2">{{ 'home.checklist.checklistEdit.listtype.commitments' | translate }}</ion-option>
+                <ion-option value="3">{{ 'home.checklist.checklistEdit.listtype.accounts' | translate }}</ion-option>
             </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                {{ 'home.checklist.checklistEdit.listpermanent' | translate }}<br/>
+                <span class="item-hint">{{ 'home.checklist.checklistEdit.listpermanent.hint' | translate }}</span>
+            </ion-label>
+            <ion-toggle name="permanent" [(ngModel)]="permanent"></ion-toggle>
         </ion-item>
     </ion-list>
 </ion-content>
 
 <ion-footer>
     <div>
-        <button ion-button full (click)="save()">Salvar</button>
+        <button ion-button full (click)="save()">{{ 'global.btn.save' | translate }}</button>
     </div>
 </ion-footer>
