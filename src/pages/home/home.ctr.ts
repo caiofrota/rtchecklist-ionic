@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, NavController, ToastController, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, LoadingController, ModalController, NavController, ToastController, Loading, Modal } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
-import { ChecklistController, ChecklistEditController, ChecklistService, ChecklistStorageService, IChecklist } from '../checklist';
+import { TranslateService } from '@ngx-translate/core';
+import { ChecklistController, ChecklistService, ChecklistStorageService, ChecklistEditController, IChecklist } from '../checklist';
 
 @Component({
   selector: 'home',
   templateUrl: 'home.html'
 })
 export class HomeController implements OnInit {
+    // Controller attributes.
     private _loading: Loading;
 
     // Page attributes.
@@ -17,16 +19,13 @@ export class HomeController implements OnInit {
 
     /**
      * Constructor.
-     * 
-     * @param NavController _navCtrl Navigation Controller.
-     * @param ChecklistService _checklistService Checlist Service.
-     * @param AlertController _alertController Alert controller.
      */
     constructor(private _alertController: AlertController,
-                private _navCtrl: NavController,
-                private _toastCtrl: ToastController,
                 private _loadingController: LoadingController,
                 private _modalController: ModalController,
+                private _navController: NavController,
+                private _toastController: ToastController,
+                private _translate: TranslateService,
                 private _checklistStorageService: ChecklistStorageService,
                 private _checklistService: ChecklistService) {
         // Do nothing.
@@ -84,8 +83,8 @@ export class HomeController implements OnInit {
                         this.loadItems();
                     },
                     (error: any) => {
-                        this._toastCtrl.create({
-                            message: 'Ocorreu um erro ao recuperar seus checklists.',
+                        this._toastController.create({
+                            message: this._translate.instant('global.error'),
                             duration: 3000
                         });
                     }
@@ -103,136 +102,70 @@ export class HomeController implements OnInit {
         }
     }
 
-    public createChecklist_test(): void {
-        console.log(ChecklistEditController.name);
-        this._modalController.create(ChecklistEditController.name).present();
-    }
-
     /**
-     * Show a popup to input a checklist key to create.
+     * Show a modal page to create a checklist.
      */
     public createChecklist(): void {
-        let alert: any = this._alertController.create({
-            title: 'Criar Lista',
-            message: 'Insira o título da lista a ser criada.<br/>Ex: Lista de Compras',
-            inputs: [{
-                name: 'checklistTitle',
-                placeholder: 'Título da lista.'
-            }],
-            buttons: [
-                {
-                    text: 'Cancelar',
-                    handler: (data: any) => { }
-                },
-                {
-                    text: 'Criar',
-                    handler: (data: any) => {
-                        this._loading = this._loadingController.create({
-                            content: 'Carregando...',
-                            dismissOnPageChange: true
-                        });
-                        this._loading.present();
-                        if (data.checklistTitle) {
-                            this._checklistService.createChecklist(data.checklistTitle).subscribe(
-                                (checklist: FirebaseObjectObservable<IChecklist>) => {
-                                    this._checklistStorageService.addChecklistKey(checklist.$ref.key);
-                                    this.loadItems();
-                                    this._navCtrl.push(ChecklistController, { checklist });
-                                    this._loading.dismiss();
-                                    let toast: any = this._toastCtrl.create({
-                                        message: 'Lista criada com sucesso.',
-                                        duration: 3000
-                                    });
-                                    toast.present();
-                                },
-                                (error) => {
-                                    this._loading.dismiss();
-                                    let toast: any = this._toastCtrl.create({
-                                        message: 'Ocorreu um erro na criação da lista.',
-                                        duration: 3000
-                                    });
-                                    toast.present();
-                                }
-                            );
-                        } else {
-                            this._loading.dismiss();
-                            this.createChecklist();
-                            this._toastCtrl.create({
-                                message: 'O campo "Título da lista" é obrigatório.',
-                                duration: 3000
-                            }).present();
-                        }
-                    }
-                }
-            ]
-        });
-        alert.present();
+        let modal: Modal = this._modalController.create(ChecklistEditController.name);
+        modal.onDidDismiss(() => { this.loadItems() });
+        modal.present();
     }
 
     /**
      * Show a popup to input a checklist key to import.
      */
     public importChecklist(): void {
-        let prompt = this._alertController.create({
-            title: 'Importar Lista',
-            message: 'Cole o código da lista que deseja importar.<br/>Ex: -KsnibokCYzTcCG4tp8p',
+        this._alertController.create({
+            title: this._translate.instant('home.importlist.title'),
+            message: this._translate.instant('home.importlist.description'),
             inputs: [{
                 name: 'checklistKey',
-                placeholder: 'Chave da lista.'
+                placeholder: this._translate.instant('home.importlist.checklistkey')
             }],
             buttons: [
                 {
-                    text: 'Cancelar',
+                    text: this._translate.instant('global.btn.cancel'),
                     handler: (data: any) => { }
                 },
                 {
-                    text: 'Importar',
+                    text: this._translate.instant('global.btn.import'),
                     handler: (data: any) => {
-                        this._loading = this._loadingController.create({
-                            content: 'Carregando...',
-                            dismissOnPageChange: true
-                        });
-                        this._loading.present();
-                        console.log(data);
                         if (data.checklistKey) {
+                            this.showLoading();
                             this._checklistService.getChecklist(data.checklistKey).$ref.once('value', (ref: any) => {
                                 let value: IChecklist = ref.val();
+                                this.hideLoading();
                                 if (value) {
                                     this._checklistStorageService.addChecklistKey(data.checklistKey);
                                     this.loadItems();
-                                    this._loading.dismiss();
-                                    this._toastCtrl.create({
-                                        message: 'Lista importada com sucesso.',
+                                    this._toastController.create({
+                                        message: this._translate.instant('home.importlist.success'),
                                         duration: 3000
                                     }).present();
                                 } else {
-                                    this._loading.dismiss();
-                                    this._toastCtrl.create({
-                                        message: 'A lista não foi encontrada.',
+                                    this._toastController.create({
+                                        message: this._translate.instant('home.importlist.error.notfount'),
                                         duration: 3000
                                     }).present();
                                 }
                             }, (error: any) => {
-                                this._loading.dismiss();
-                                this._toastCtrl.create({
-                                    message: 'Ocorreu um erro ao tentar pesquisar a lista. Por favor, tente novamente.',
+                                this.hideLoading();
+                                this._toastController.create({
+                                    message: this._translate.instant('global.error'),
                                     duration: 3000
                                 }).present();
                             })
-                            
                         } else {
-                            this._loading.dismiss();
                             this.importChecklist();
-                            this._toastCtrl.create({
-                                message: 'O campo "Chave da lista" é obrigatório.',
+                            this._toastController.create({
+                                message: this._translate.instant('home.importlist.error.checklistkey.required'),
                                 duration: 3000
                             }).present();
                         }
                     }
                 }
             ]
-        });
-        prompt.present();
+        }).present();
     }
 
     /**
@@ -251,7 +184,25 @@ export class HomeController implements OnInit {
      * @param FirebaseObjectObservable<IChecklist> checklist Checklist
      */
     public editList(checklist: FirebaseObjectObservable<IChecklist>): void {
-        this._navCtrl.push(ChecklistController, { checklist: checklist });
+        this._navController.push(ChecklistController, { checklist: checklist });
+    }
+
+    /**
+     * Show loading dialog.
+     */
+    private showLoading(): void {
+        this._loading = this._loadingController.create({
+            content: this._translate.instant('global.lbl.loading'),
+            dismissOnPageChange: true
+        });
+        this._loading.present();
+    }
+
+    /**
+     * Hide loading dialog.
+     */
+    private hideLoading(): void {
+        this._loading.dismiss();
     }
 
     /**

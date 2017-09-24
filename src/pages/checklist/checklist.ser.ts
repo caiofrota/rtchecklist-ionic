@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { IChecklist, IChecklistItem } from './'
+import { IChecklist, IChecklistItem, EChecklistType } from './'
 
 /**
  * Checklist Service.
@@ -40,16 +40,17 @@ export class ChecklistService {
      * @param permanent If true, this list won't be removed.
      * @return any Observable.
      */
-    public createChecklist(checklistName: string, permanent?: boolean): any {
+    public createChecklist(checklistName: string, type?: EChecklistType, permanent?: boolean): any {
         this.clearOldestChecklists();
         let listData: IChecklist = {
             name: checklistName,
             permanent: ((permanent) ? true : false),
+            type: ((type) ? type : null),
             items: [],
             created_on: new Date().getTime(),
             updated_on: new Date().getTime(),
             last_access_on: new Date().getTime()
-        }
+        };
         return Observable.create((observer: any) => {
             this._firebase.list('/checklists').push(listData).then(
                 (item: any) => {
