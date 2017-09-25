@@ -7,6 +7,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AdMobPro } from '@ionic-native/admob-pro';
+import { AppRate } from '@ionic-native/app-rate';
 
 import { MyAppAdMobConfig } from '../providers/app.config';
 import { HomeController } from '../pages/home';
@@ -23,7 +24,8 @@ export class MyApp {
                 splashScreen: SplashScreen,
                 keyboard: Keyboard,
                 translate: TranslateService,
-                AdMobPro: AdMobPro) {
+                AdMobPro: AdMobPro,
+                appRate: AppRate) {
         translate.setDefaultLang('en');
         translate.use(navigator.language);
 
@@ -33,6 +35,7 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
+            // Keyboard handle.
             keyboard.onKeyboardShow().subscribe(() => {
                 document.body.classList.add('keyboard-is-open');
             });
@@ -40,6 +43,7 @@ export class MyApp {
                 document.body.classList.remove('keyboard-is-open');
             });
             
+            // AdMob.
             this.admobId = {
                 banner: MyAppAdMobConfig.others.banner,
                 interstitial: MyAppAdMobConfig.others.interstitial
@@ -55,7 +59,6 @@ export class MyApp {
                     interstitial: MyAppAdMobConfig.ios.interstitial
                 };
             }
-            
             if(AdMobPro) {
                 AdMobPro.createBanner({
                     adId: this.admobId.banner,
@@ -63,6 +66,15 @@ export class MyApp {
                     autoShow: true
                 });
             }
+
+            // App rate.
+            appRate.preferences.usesUntilPrompt = 3;
+            appRate.preferences.storeAppURL = {
+                ios: '1287179217',
+                android: 'market://details?id=com.fortdev.rtchecklist',
+                windows: 'ms-windows-store://review/?ProductId=<store_id>'
+            };
+            appRate.promptForRating(false);
         });
     }
 }

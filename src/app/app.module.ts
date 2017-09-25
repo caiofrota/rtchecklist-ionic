@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Clipboard } from '@ionic-native/clipboard';
 import { AdMobPro } from '@ionic-native/admob-pro';
+import { AppRate } from '@ionic-native/app-rate';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -56,6 +57,7 @@ import { MyApp } from './app.component';
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         Keyboard,
         AdMobPro,
+        AppRate,
         Clipboard,
         ChecklistStorageService,
         ChecklistService
