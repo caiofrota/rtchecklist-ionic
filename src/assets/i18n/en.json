@@ -32,6 +32,12 @@
     "checklist.itemedit.shopping.quantity": "Quantity",
     "checklist.itemedit.shopping.value": "Price",
     "checklist.itemedit.commitment.date": "Date",
+    "checklist.itemedit.account.moviment": "Moviment",
+    "checklist.itemedit.account.moviment.none": "None",
+    "checklist.itemedit.account.moviment.gain": "Gain",
+    "checklist.itemedit.account.moviment.expense": "Expense",
+    "checklist.itemedit.account.duedate": "Due date",
+    "checklist.itemedit.account.value": "Value",
     "checklist.itemedit.success": "Item updated successfully!",
     "checklist.itemedit.error.name.checklistkey.required": "\"Item\" is required.",
 

@@ -38,6 +38,23 @@
                     {{ item.date | date }}
                 </span>
             </ion-label>
+            <!-- ACCOUNTS -->
+            <ion-label *ngIf="(checklist | async)?.type == 3">
+                <span *ngIf="item.moviment">
+                    <i class="fa fa-arrow-up" *ngIf="item.moviment == 1"></i>
+                    <i class="fa fa-arrow-down" *ngIf="item.moviment == 2"></i>
+                </span>
+                <span class="fdcl-checklist-item-label">{{ item.name }}</span><br/>
+                <span class="fdcl-checklist-item-label fdcl-checklist-item-commitment-date" *ngIf="item.value">
+                    {{ item.value | number:'1.2-2' }}
+                </span>
+                <span class="fdcl-checklist-item-label fdcl-checklist-item-commitment-date" *ngIf="item.value && item.dueDate">
+                    -
+                </span>
+                <span class="fdcl-checklist-item-label fdcl-checklist-item-commitment-date" *ngIf="item.dueDate">
+                    {{ item.dueDate | date }}
+                </span>
+            </ion-label>
             <ion-checkbox [ngModel]="item.checked" (click)="toggleChecklistItemChecked(item)"></ion-checkbox>
             <button ion-button clear item-right (click)="editChecklistItem(item)"><i class="fa fa-pencil" style="font-size: large"></i></button>
             <button ion-button clear item-right (click)="removeChecklistItem(item)"><i class="fa fa-trash" style="font-size: large"></i></button>

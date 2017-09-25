@@ -27,6 +27,23 @@
             <ion-label>{{ 'checklist.itemedit.commitment.date' | translate }}</ion-label>
             <ion-input type="date" name="date" [(ngModel)]="date"></ion-input>
         </ion-item>
+        <!-- ACCOUNT -->
+        <ion-item *ngIf="checklistType == 3">
+            <ion-label>{{ 'checklist.itemedit.account.moviment' | translate }}</ion-label>
+            <ion-select [(ngModel)]="moviment" placeholder="{{ 'checklist.itemedit.account.moviment.none' | translate }}">
+                <ion-option value="0">{{ 'checklist.itemedit.account.moviment.none' | translate }}</ion-option>
+                <ion-option value="1">{{ 'checklist.itemedit.account.moviment.gain' | translate }}</ion-option>
+                <ion-option value="2">{{ 'checklist.itemedit.account.moviment.expense' | translate }}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="checklistType == 3">
+            <ion-label>{{ 'checklist.itemedit.account.duedate' | translate }}</ion-label>
+            <ion-input type="date" name="dueDate" [(ngModel)]="dueDate"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="checklistType == 3">
+            <ion-label>{{ 'checklist.itemedit.account.value' | translate }}</ion-label>
+            <ion-input type="number" name="value" [(ngModel)]="value" step="0.01"></ion-input>
+        </ion-item>
     </ion-list>
 </ion-content>
 

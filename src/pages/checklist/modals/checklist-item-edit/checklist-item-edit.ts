@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ViewController, NavParams, IonicPage, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
-import { ChecklistStorageService, ChecklistService, ChecklistController, IChecklistItem, IChecklistItemShopping, IChecklistItemCommitment, IChecklistItemAccount, EChecklistType } from '../../';
+import { ChecklistStorageService, ChecklistService, ChecklistController, IChecklistItem, IChecklistItemShopping, IChecklistItemCommitment, IChecklistItemAccount, EChecklistType, EChecklistItemAccountMoviment } from '../../';
 
 @IonicPage()
 @Component({
@@ -20,6 +20,8 @@ export class ChecklistItemEditController implements OnInit {
     public quantity: number;
     public value: number;
     public date: Date;
+    public dueDate: Date;
+    public moviment: EChecklistItemAccountMoviment;
 
     /**
      * Constructor.
@@ -53,6 +55,13 @@ export class ChecklistItemEditController implements OnInit {
                     let checklistItem: IChecklistItemCommitment = { name: this.name, checked: oldChecklistItem.checked };
                     checklistItem.date = (this.date) ? this.date : null;
                     newChecklistItem = checklistItem;
+                } else if (this.checklistType == EChecklistType.ACCOUNTS) {
+                    let checklistItem: IChecklistItemAccount = { name: this.name, checked: oldChecklistItem.checked };
+                    checklistItem.dueDate = (this.dueDate) ? this.dueDate : null;
+                    checklistItem.moviment = (this.moviment) ? this.moviment : null;
+                    checklistItem.value = (this.value) ? this.value : null;
+                    newChecklistItem = checklistItem;
+                    console.log(newChecklistItem);
                 } else {
                     let checklistItem: IChecklistItemShopping = { name: this.name, checked: oldChecklistItem.checked };
                     newChecklistItem = checklistItem;
@@ -118,7 +127,6 @@ export class ChecklistItemEditController implements OnInit {
         this.checklistItem = this._navParams.get('checklistItem');
         this.checklistType = this._navParams.get('checklistType');
         if (this.checklistItem) {
-            console.log(this.checklistItem);
             this.checklistItem.once('value', (value) => {
                 if (EChecklistType.SHOPPING == this.checklistType) {
                     let data: IChecklistItemShopping = value.val();
@@ -129,6 +137,12 @@ export class ChecklistItemEditController implements OnInit {
                     let data: IChecklistItemCommitment = value.val();
                     this.name = data.name;
                     this.date = data.date;
+                } else if (EChecklistType.ACCOUNTS == this.checklistType) {
+                    let data: IChecklistItemAccount = value.val();
+                    this.name = data.name;
+                    this.dueDate = data.dueDate;
+                    this.moviment = data.moviment;
+                    this.value = data.value;
                 } else {
                     let data: IChecklistItem = value.val();
                     this.name = data.name;
@@ -136,4 +150,4 @@ export class ChecklistItemEditController implements OnInit {
             });
         }
     }
-}  
+}

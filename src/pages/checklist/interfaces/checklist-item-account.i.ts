@@ -9,13 +9,13 @@ import { IChecklistItem } from '../';
 export interface IChecklistItemAccount extends IChecklistItem {
     dueDate?: Date;
     value?: number;
-    moviment: EChecklistItemAccountMoviment;
+    moviment?: EChecklistItemAccountMoviment;
 }
 
 /**
  * Enumeration that indicates the type of movement.
  */
 export enum EChecklistItemAccountMoviment {
-    GAIN = 0,
-    EXPENSE = 1,
+    GAIN = 1,
+    EXPENSE = 2,
 }
