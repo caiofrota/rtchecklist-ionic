@@ -5,8 +5,8 @@
     "home.btn.newlist": "New List",
     "home.btn.importlist": "Import List",
 
-    "home.checklist.checklistEdit.title.new": "New lista",
-    "home.checklist.checklistEdit.title.edit": "Edit lista",
+    "home.checklist.checklistEdit.title.new": "New list",
+    "home.checklist.checklistEdit.title.edit": "Edit list",
     "home.checklist.checklistEdit.listtitle": "Title",
     "home.checklist.checklistEdit.listtype": "Type",
     "home.checklist.checklistEdit.listtype.none": "None",
