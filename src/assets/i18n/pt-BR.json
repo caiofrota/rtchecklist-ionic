@@ -19,6 +19,13 @@
     "home.checklist.checklistEdit.success.edit": "Lista atualizada com sucesso!",
     "home.checklist.checklistEdit.error.title.required": "O \"Título\" é obrigatório",
 
+    "checklist.additem": "Informe um item a ser adicionado",
+    "checklist.additem.add": "Adicionar item",
+    "checklist.sharelist.share": "Compartilhar lista",
+    "checklist.menu.title": "Menu",
+    "checklist.menu.edit": "Editar lista",
+    "checklist.menu.clear": "Limpar lista",
+
     "home.checklist.checklistImport.title": "Importar lista",
     "home.checklist.checklistImport.description": "Cole o código da lista que deseja importar.",
     "home.checklist.checklistImport.description.eg": "Ex: -KsnibokCYzTcCG4tp8p",

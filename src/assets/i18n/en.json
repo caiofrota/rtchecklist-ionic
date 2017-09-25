@@ -19,6 +19,13 @@
     "home.checklist.checklistEdit.success.edit": "List updated successfully!",
     "home.checklist.checklistEdit.error.title.required": "\"List title\" is required.",
 
+    "checklist.additem": "Type an item to add",
+    "checklist.additem.add": "Add item",
+    "checklist.sharelist.share": "Share list",
+    "checklist.menu.title": "Menu",
+    "checklist.menu.edit": "Edit list",
+    "checklist.menu.clear": "Clear list",
+
     "home.checklist.checklistImport.title": "Import List",
     "home.checklist.checklistImport.description": "Paste the list key you want to import.",
     "home.checklist.checklistImport.description.eg": "E.g.: -KsnibokCYzTcCG4tp8p",
