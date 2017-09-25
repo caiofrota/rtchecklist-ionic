@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController, ModalController, NavController, ToastController, Loading, Modal } from 'ionic-angular';
+import { ModalController, NavController, ToastController, Modal } from 'ionic-angular';
 import { FirebaseObjectObservable } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
 import { ChecklistController, ChecklistService, ChecklistStorageService, ChecklistEditController, ChecklistImportController, IChecklist } from '../checklist';
@@ -9,9 +9,6 @@ import { ChecklistController, ChecklistService, ChecklistStorageService, Checkli
   templateUrl: 'home.html'
 })
 export class HomeController implements OnInit {
-    // Controller attributes.
-    private _loading: Loading;
-
     // Page attributes.
     filter: string;
     items: Array<FirebaseObjectObservable<IChecklist>>;
@@ -20,9 +17,7 @@ export class HomeController implements OnInit {
     /**
      * Constructor.
      */
-    constructor(private _alertController: AlertController,
-                private _loadingController: LoadingController,
-                private _modalController: ModalController,
+    constructor(private _modalController: ModalController,
                 private _navController: NavController,
                 private _toastController: ToastController,
                 private _translate: TranslateService,
@@ -137,24 +132,6 @@ export class HomeController implements OnInit {
      */
     public editList(checklist: FirebaseObjectObservable<IChecklist>): void {
         this._navController.push(ChecklistController, { checklist: checklist });
-    }
-
-    /**
-     * Show loading dialog.
-     */
-    private showLoading(): void {
-        this._loading = this._loadingController.create({
-            content: this._translate.instant('global.lbl.loading'),
-            dismissOnPageChange: true
-        });
-        this._loading.present();
-    }
-
-    /**
-     * Hide loading dialog.
-     */
-    private hideLoading(): void {
-        this._loading.dismiss();
     }
 
     /**
