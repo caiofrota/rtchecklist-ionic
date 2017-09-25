@@ -16,8 +16,7 @@
         </ion-item>
         <ion-item>
             <ion-label>{{ 'home.checklist.checklistEdit.listtype' | translate }}</ion-label>
-            <ion-input *ngIf="type < 0" [(ngModel)]="type"></ion-input>
-            <ion-select [(ngModel)]="type" placeholder="{{ 'home.checklist.checklistEdit.listtype.none' | translate }}">
+            <ion-select [(ngModel)]="type" placeholder="{{ ((type == 1) ? 'home.checklist.checklistEdit.listtype.shopping' : ((type == 2) ? 'home.checklist.checklistEdit.listtype.commitments' : ((type == 3) ? 'home.checklist.checklistEdit.listtype.accounts' : 'home.checklist.checklistEdit.listtype.none'))) | translate }}">
                 <ion-option value="0">{{ 'home.checklist.checklistEdit.listtype.none' | translate }}</ion-option>
                 <ion-option value="1">{{ 'home.checklist.checklistEdit.listtype.shopping' | translate }}</ion-option>
                 <ion-option value="2">{{ 'home.checklist.checklistEdit.listtype.commitments' | translate }}</ion-option>

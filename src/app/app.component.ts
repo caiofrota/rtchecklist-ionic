@@ -68,6 +68,7 @@ export class MyApp {
             }
 
             // App rate.
+            /**/
             appRate.preferences.usesUntilPrompt = 3;
             appRate.preferences.storeAppURL = {
                 ios: '1287179217',
@@ -75,6 +76,7 @@ export class MyApp {
                 windows: 'ms-windows-store://review/?ProductId=<store_id>'
             };
             appRate.promptForRating(false);
+            /**/
         });
     }
 }

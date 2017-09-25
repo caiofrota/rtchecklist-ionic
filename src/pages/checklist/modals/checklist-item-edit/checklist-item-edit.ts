@@ -20,7 +20,7 @@ export class ChecklistItemEditController implements OnInit {
     public value: number;
     public date: Date;
     public dueDate: Date;
-    public moviment: EChecklistItemAccountMoviment;
+    public moviment: EChecklistItemAccountMoviment = 0;
 
     /**
      * Constructor.
