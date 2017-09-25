@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ViewController, NavParams, IonicPage, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { FirebaseObjectObservable } from 'angularfire2/database';
+import { ViewController, NavParams, IonicPage, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ChecklistStorageService, ChecklistService, ChecklistController, IChecklistItem, IChecklistItemShopping, IChecklistItemCommitment, IChecklistItemAccount, EChecklistType, EChecklistItemAccountMoviment } from '../../';
+import { IChecklistItem, IChecklistItemShopping, IChecklistItemCommitment, IChecklistItemAccount, EChecklistType, EChecklistItemAccountMoviment } from '../../';
 
 @IonicPage()
 @Component({
@@ -27,13 +26,10 @@ export class ChecklistItemEditController implements OnInit {
      * Constructor.
      */
     constructor(private _loadingController: LoadingController,
-                private _navController: NavController,
                 private _navParams: NavParams,
                 private _toastController: ToastController,
                 private _translate: TranslateService,
-                private _viewController: ViewController,
-                private _checklistStorageService: ChecklistStorageService,
-                private _checklistService: ChecklistService) {
+                private _viewController: ViewController) {
         // Do nothing.
     }
 

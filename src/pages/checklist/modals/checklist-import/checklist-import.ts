@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewController, IonicPage, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { FirebaseObjectObservable } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
 import { ChecklistStorageService, ChecklistService, IChecklist } from '../../';
 
