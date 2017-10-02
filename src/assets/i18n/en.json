@@ -55,7 +55,7 @@
     "checklist.sharelist.title": "Share list",
     "checklist.sharelist.description": "Copy the checklist key and share it with anyone!",
     "checklist.sharelist.checklistkey": "Checklist key",
-    "checklist.sharelist.copy.cuccess": "Checklist key copied to clipboard!",
+    "checklist.sharelist.copy.success": "Checklist key copied to clipboard!",
 
     "global.lbl.search": "Search",
     "global.lbl.loading": "Loading...",
