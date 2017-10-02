@@ -34,5 +34,7 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 
+package-lock.json
+
 # Sensitive data
 src/providers/app.config.ts
